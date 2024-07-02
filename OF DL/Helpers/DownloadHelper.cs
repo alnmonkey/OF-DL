@@ -22,6 +22,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using static OF_DL.Entities.Lists.UserList;
+using static OF_DL.Entities.Messages.Messages;
 
 namespace OF_DL.Helpers;
 
@@ -69,9 +70,9 @@ public class DownloadHelper : IDownloadHelper
         try
         {
             string customFileName = string.Empty;
-            if (!Directory.Exists(folder + path)) // check if the folder already exists
+            if (!Directory.Exists(folder + path)) 
             {
-                Directory.CreateDirectory(folder + path); // create the new folder
+                Directory.CreateDirectory(folder + path); 
             }
             string extension = Path.GetExtension(url.Split("?")[0]);
 
@@ -736,7 +737,7 @@ public class DownloadHelper : IDownloadHelper
         return await CreateDirectoriesAndDownloadMedia(path, url, folder, media_id, api_type, task, filename, filename);
     }
 
-    public async Task<bool> DownloadPurchasedMedia(string url, string folder, long media_id, string api_type, ProgressTask task, string? filenameFormat, Purchased.List? messageInfo, Purchased.Medium? messageMedia, Purchased.FromUser? fromUser, Dictionary<string, int> users)
+    public async Task<bool> DownloadPurchasedMedia(string url, string folder, long media_id, string api_type, ProgressTask task, string? filenameFormat, Purchased.List? messageInfo, Medium? messageMedia, Purchased.FromUser? fromUser, Dictionary<string, int> users)
     {
         string path;
         if (downloadConfig.FolderPerPaidMessage && messageInfo != null && messageInfo?.id is not null && messageInfo?.createdAt is not null)
@@ -760,7 +761,7 @@ public class DownloadHelper : IDownloadHelper
                                                        ProgressTask task,
                                                        string? filenameFormat,
                                                        Purchased.List? messageInfo,
-                                                       Purchased.Medium? messageMedia,
+                                                        Medium? messageMedia,
                                                        Purchased.FromUser? fromUser,
                                                        Dictionary<string, int> users)
     {
@@ -784,19 +785,19 @@ public class DownloadHelper : IDownloadHelper
     {
         try
         {
-            string path = $"/Profile"; // specify the path for the new folder
+            string path = $"/Profile"; 
 
-            if (!Directory.Exists(folder + path)) // check if the folder already exists
+            if (!Directory.Exists(folder + path)) 
             {
-                Directory.CreateDirectory(folder + path); // create the new folder
+                Directory.CreateDirectory(folder + path); 
             }
 
             if (!string.IsNullOrEmpty(avatarUrl))
             {
                 string avatarpath = $"{path}/Avatars";
-                if (!Directory.Exists(folder + avatarpath)) // check if the folder already exists
+                if (!Directory.Exists(folder + avatarpath)) 
                 {
-                    Directory.CreateDirectory(folder + avatarpath); // create the new folder
+                    Directory.CreateDirectory(folder + avatarpath); 
                 }
 
                 List<string> avatarMD5Hashes = WidevineClient.Utils.CalculateFolderMD5(folder + avatarpath);
@@ -837,9 +838,9 @@ public class DownloadHelper : IDownloadHelper
             if (!string.IsNullOrEmpty(headerUrl))
             {
                 string headerpath = $"{path}/Headers";
-                if (!Directory.Exists(folder + headerpath)) // check if the folder already exists
+                if (!Directory.Exists(folder + headerpath)) 
                 {
-                    Directory.CreateDirectory(folder + headerpath); // create the new folder
+                    Directory.CreateDirectory(folder + headerpath); 
                 }
 
                 List<string> headerMD5Hashes = WidevineClient.Utils.CalculateFolderMD5(folder + headerpath);
@@ -906,9 +907,9 @@ public class DownloadHelper : IDownloadHelper
             {
                 path = "/Messages/Free/Videos";
             }
-            if (!Directory.Exists(folder + path)) // check if the folder already exists
+            if (!Directory.Exists(folder + path)) 
             {
-                Directory.CreateDirectory(folder + path); // create the new folder
+                Directory.CreateDirectory(folder + path); 
             }
 
 
@@ -974,7 +975,7 @@ public class DownloadHelper : IDownloadHelper
     }
 
 
-    public async Task<bool> DownloadPurchasedMessageDRMVideo(string policy, string signature, string kvp, string url, string decryptionKey, string folder, DateTime lastModified, long media_id, string api_type, ProgressTask task, string? filenameFormat, Purchased.List? messageInfo, Purchased.Medium? messageMedia, Purchased.FromUser? fromUser, Dictionary<string, int> users)
+    public async Task<bool> DownloadPurchasedMessageDRMVideo(string policy, string signature, string kvp, string url, string decryptionKey, string folder, DateTime lastModified, long media_id, string api_type, ProgressTask task, string? filenameFormat, Purchased.List? messageInfo, Medium? messageMedia, Purchased.FromUser? fromUser, Dictionary<string, int> users)
     {
         try
         {
@@ -990,9 +991,9 @@ public class DownloadHelper : IDownloadHelper
             {
                 path = "/Messages/Paid/Videos";
             }
-            if (!Directory.Exists(folder + path)) // check if the folder already exists
+            if (!Directory.Exists(folder + path)) 
             {
-                Directory.CreateDirectory(folder + path); // create the new folder
+                Directory.CreateDirectory(folder + path); 
             }
 
             if (!string.IsNullOrEmpty(filenameFormat) && messageInfo != null && messageMedia != null)
@@ -1073,9 +1074,9 @@ public class DownloadHelper : IDownloadHelper
             {
                 path = "/Posts/Free/Videos";
             }
-            if (!Directory.Exists(folder + path)) // check if the folder already exists
+            if (!Directory.Exists(folder + path)) 
             {
-                Directory.CreateDirectory(folder + path); // create the new folder
+                Directory.CreateDirectory(folder + path); 
             }
 
             if (!string.IsNullOrEmpty(filenameFormat) && postInfo != null && postMedia != null)
@@ -1154,9 +1155,9 @@ public class DownloadHelper : IDownloadHelper
             {
                 path = "/Posts/Free/Videos";
             }
-            if (!Directory.Exists(folder + path)) // check if the folder already exists
+            if (!Directory.Exists(folder + path)) 
             {
-                Directory.CreateDirectory(folder + path); // create the new folder
+                Directory.CreateDirectory(folder + path); 
             }
 
             if (!string.IsNullOrEmpty(filenameFormat) && postInfo != null && postMedia != null)
@@ -1301,7 +1302,7 @@ public class DownloadHelper : IDownloadHelper
         return false;
     }
 
-    public async Task<bool> DownloadPurchasedPostDRMVideo(string policy, string signature, string kvp, string url, string decryptionKey, string folder, DateTime lastModified, long media_id, string api_type, ProgressTask task, string? filenameFormat, Purchased.List? postInfo, Purchased.Medium? postMedia, Purchased.FromUser? fromUser, Dictionary<string, int> users)
+    public async Task<bool> DownloadPurchasedPostDRMVideo(string policy, string signature, string kvp, string url, string decryptionKey, string folder, DateTime lastModified, long media_id, string api_type, ProgressTask task, string? filenameFormat, Purchased.List? postInfo, Medium? postMedia, Purchased.FromUser? fromUser, Dictionary<string, int> users)
     {
         try
         {
@@ -1317,9 +1318,9 @@ public class DownloadHelper : IDownloadHelper
             {
                 path = "/Posts/Paid/Videos";
             }
-            if (!Directory.Exists(folder + path)) // check if the folder already exists
+            if (!Directory.Exists(folder + path)) 
             {
-                Directory.CreateDirectory(folder + path); // create the new folder
+                Directory.CreateDirectory(folder + path); 
             }
 
 
@@ -1393,9 +1394,9 @@ public class DownloadHelper : IDownloadHelper
             Uri uri = new(url);
             string filename = System.IO.Path.GetFileName(uri.LocalPath).Split(".")[0];
             string path = "/Archived/Posts/Free/Videos";
-            if (!Directory.Exists(folder + path)) // check if the folder already exists
+            if (!Directory.Exists(folder + path)) 
             {
-                Directory.CreateDirectory(folder + path); // create the new folder
+                Directory.CreateDirectory(folder + path); 
             }
 
             if (!string.IsNullOrEmpty(filenameFormat) && postInfo != null && postMedia != null)
